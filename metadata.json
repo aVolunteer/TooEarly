@@ -1,0 +1,7 @@
+{
+  "name": "FocusTask High Contrast",
+  "description": "A high-visibility, dark-mode To-Do application designed for clarity. Features large controls, audio feedback, periodic reminders, and AI voice assistance.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
