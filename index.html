@@ -9,45 +9,49 @@
     <title>FocusTask</title>
     <link rel="manifest" href="manifest.json" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // POLYFILL: Define 'process' to prevent library crashes
+      window.process = { env: { NODE_ENV: 'development' } };
+      
+      // ERROR HANDLER: Catch early startup errors
+      window.addEventListener('error', function(event) {
+        const root = document.getElementById('root');
+        if (root) {
+          root.innerHTML = '<div style="color: #ef4444; padding: 20px; font-family: monospace;">CRITICAL ERROR: ' + event.message + '</div>';
+        }
+      });
+    </script>
     <style>
-      /* Custom scrollbar for dark theme */
-      ::-webkit-scrollbar {
-        width: 12px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #1f2937;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #4b5563;
-        border-radius: 6px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #6b7280;
-      }
+      ::-webkit-scrollbar { width: 12px; }
+      ::-webkit-scrollbar-track { background: #1f2937; }
+      ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 6px; }
+      ::-webkit-scrollbar-thumb:hover { background: #6b7280; }
       
       @keyframes pulse-red {
         0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
         50% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
       }
-      .animate-pulse-red {
-        animation: pulse-red 2s infinite;
-      }
+      .animate-pulse-red { animation: pulse-red 2s infinite; }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
-    "react-dom/client": "https://aistudiocdn.com/react-dom@^19.2.0/client",
-    "react-dom": "https://aistudiocdn.com/react-dom@^19.2.0",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@0.0.2",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
-  }
-}
-</script>
-</head>
+    <script type="importmap">
+    {
+      "imports": {
+        "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0",
+        "react-dom/client": "https://aistudiocdn.com/react-dom@^19.2.0/client",
+        "react-dom": "https://aistudiocdn.com/react-dom@^19.2.0",
+        "react/": "https://aistudiocdn.com/react@^19.2.0/",
+        "react": "https://aistudiocdn.com/react@^19.2.0",
+        "@google/genai": "https://aistudiocdn.com/@google/genai@0.0.2",
+        "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
+      }
+    }
+    </script>
+  </head>
   <body class="bg-gray-950 text-white overflow-hidden select-none">
-    <div id="root" class="h-screen w-screen flex items-center justify-center text-gray-500">Loading FocusTask...</div>
+    <div id="root" class="h-screen w-screen flex items-center justify-center text-gray-500 font-mono">
+      Loading FocusTask...
+    </div>
+    <!-- CRITICAL: Load the React Application -->
+    <script type="module" src="./index.tsx"></script>
   </body>
 </html>
